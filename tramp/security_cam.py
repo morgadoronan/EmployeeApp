@@ -244,5 +244,18 @@ def main():
     cap.release()
     cv2.destroyAllWindows()
 
+import traceback
+
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except Exception as e:
+        error_msg = traceback.format_exc()
+        print("\n\nCRITICAL ERROR OCCURRED:")
+        print(error_msg)
+        
+        with open("crash_log.txt", "w") as f:
+            f.write(error_msg)
+        print("\nError info saved to 'crash_log.txt'.")
+        
+    input("\nPress Enter to exit...")
